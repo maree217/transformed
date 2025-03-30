@@ -1,135 +1,436 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ram Senthil-Maree - Strategic Transformation Leader</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-    header {
-      background-color: #004d66;
-      color: white;
-      padding: 2rem;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-    header p {
-      margin-top: 0.5rem;
-    }
-    .metrics {
-      display: flex;
-      justify-content: space-around;
-      background-color: #e0f7fa;
-      padding: 2rem 1rem;
-      flex-wrap: wrap;
-    }
-    .metric {
-      margin: 1rem;
-      text-align: center;
-    }
-    .metric h2 {
-      margin: 0;
-      font-size: 2rem;
-      color: #00796b;
-    }
-    .section {
-      padding: 2rem;
-      border-bottom: 1px solid #ccc;
-    }
-    .section h2 {
-      color: #004d66;
-    }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-    .card {
-      background: white;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 1rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .card h3 {
-      margin-top: 0;
-    }
-    .tags {
-      margin-top: 1rem;
-      font-size: 0.9rem;
-      color: #555;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: #004d66;
-      color: white;
-    }
-    .highlight {
-      font-weight: bold;
-      color: #00695c;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Ram Senthil-Maree</h1>
-    <p>Strategic Transformation Leader | Email: 2maree@gmail.com | LinkedIn: <a href="https://linkedin.com/in/rammaree" style="color: #fff;">rammaree</a></p>
-  </header>
+import React, { useState } from 'react';
 
-  <section class="metrics">
-    <div class="metric"><h2>£10M+</h2><p>Portfolios Managed</p></div>
-    <div class="metric"><h2>£5M+</h2><p>Benefits Delivered</p></div>
-    <div class="metric"><h2>80+</h2><p>People Led</p></div>
-    <div class="metric"><h2>5+</h2><p>Industries</p></div>
-    <div class="metric"><h2>8,000+</h2><p>Properties Transformed</p></div>
-  </section>
+const TransformationCaseStudyExplorer = () => {
+  // Data for the case studies based on your CV
+  const caseStudies = [
+    {
+      id: 1,
+      title: "Core System Turnaround",
+      industry: "Housing",
+      challengeType: ["CRM Implementation", "Programme Rescue", "Team Leadership"],
+      summary: "Rescued £1.2M migration across 8,000 properties",
+      situation: "A failing £1.2M Civica CX CRM migration affecting 8,000 properties, over budget by £500k with critical timelines missed.",
+      approach: "Restructured governance, created problem-solving focused teams, rebaselined the project with transparent tracking.",
+      outcome: "Successfully delivered migration, stabilised core operations. Transformed a demoralised team into a cohesive unit.",
+      metrics: [
+        { label: "Project Budget", value: "£1.2M" },
+        { label: "Properties Affected", value: "8,000" },
+        { label: "Budget Overrun Recouped", value: "£500k+" },
+        { label: "Team Size", value: "20-30+" }
+      ],
+      techStack: ["Civica CX", "Microsoft Azure", "Power BI"],
+      lessons: "Technical rescues require equal focus on people and process. Creating psychological safety is essential for honest problem identification.",
+      year: 2023
+    },
+    {
+      id: 2,
+      title: "Building Safety Compliance",
+      industry: "Housing",
+      challengeType: ["Regulatory Compliance", "System Integration", "Change Management"],
+      summary: "Post-Grenfell risk compliance across 8,000 properties",
+      situation: "Urgent need for comprehensive safety monitoring across 8,000 properties with data scattered across multiple platforms.",
+      approach: "Implemented 'True Compliance' SaaS with complex API integrations to D365. Used co-creation approach to overcome resistance.",
+      outcome: "Transformed from manual, reactive safety tracking to automated, proactive monitoring across six safety streams.",
+      metrics: [
+        { label: "Programme Budget", value: "£500k" },
+        { label: "Safety Streams", value: "6+" },
+        { label: "Properties Covered", value: "8,000" },
+        { label: "Staff Affected", value: "50+" }
+      ],
+      techStack: ["True Compliance SaaS", "Dynamics 365", "Power BI", "Custom APIs"],
+      lessons: "Co-creating solutions with resistant stakeholders turns them into champions for change.",
+      year: 2022
+    },
+    {
+      id: 3,
+      title: "4G Nationwide Launch",
+      industry: "Telecommunications",
+      challengeType: ["Infrastructure", "Post-Merger Integration", "Team Leadership"],
+      summary: "Led £5M+ data services programme for UK's first 4G launch",
+      situation: "Complex merger of Orange and T-Mobile networks requiring integration for 4G launch under intense competitive pressure.",
+      approach: "Created cross-functional 'tiger teams' mixing staff from both companies. Implemented 'best of both' approach to cultural integration.",
+      outcome: "Delivered platform on time supporting nationwide 4G launch, serving millions of customers across the UK.",
+      metrics: [
+        { label: "Programme Budget", value: "£5M+" },
+        { label: "Team Size", value: "80 people" },
+        { label: "Networks Merged", value: "2" },
+        { label: "Customer Impact", value: "Millions" }
+      ],
+      techStack: ["Network Infrastructure", "Integration Middleware", "OSS/BSS Systems"],
+      lessons: "Cross-functional teams with diverse backgrounds accelerate complex integrations when unified by a clear purpose.",
+      year: 2014
+    },
+    {
+      id: 4,
+      title: "P2P Automation",
+      industry: "Housing",
+      challengeType: ["Process Automation", "Finance", "Efficiency"],
+      summary: "Tackled inefficiencies in £50M+ annual spend cycle",
+      situation: "Manual purchase-to-pay processes creating delays, inaccurate forecasting, and excessive administrative burden.",
+      approach: "Mapped entire P2P journey, identified pain points, implemented D365/Power Platform solution with phased rollout.",
+      outcome: "Improved forecasting by 10-15%, reduced processing time by 30-40%, enhanced supplier relationships.",
+      metrics: [
+        { label: "Annual Spend", value: "£50M+" },
+        { label: "Process Time", value: "-40%" },
+        { label: "Forecast Accuracy", value: "+15%" },
+        { label: "Suppliers Impacted", value: "Hundreds" }
+      ],
+      techStack: ["Dynamics 365", "Power Platform", "Power Automate", "SharePoint"],
+      lessons: "Finance transformation requires both rigorous governance and user-friendly workflows to ensure adoption.",
+      year: 2021
+    },
+    {
+      id: 5,
+      title: "Government PMO Transformation",
+      industry: "Public Sector",
+      challengeType: ["Governance", "Programme Management", "Strategy"],
+      summary: "Designed PMOs for £10Ms-£100Ms complex transformations",
+      situation: "Major government departments struggling with effective governance for large, complex transformation programmes.",
+      approach: "Conducted capability assessments, designed tailored PMO structures, provided coaching to leadership teams.",
+      outcome: "Improved governance for critical public sector change initiatives affecting millions of citizens.",
+      metrics: [
+        { label: "Programme Scales", value: "£10M-£100M+" },
+        { label: "Departments", value: "DWP, Home Office" },
+        { label: "Citizen Impact", value: "Millions" },
+        { label: "Consultants Trained", value: "200+" }
+      ],
+      frameworks: ["MSP", "PRINCE2", "PMO Charter", "Capability Maturity Model"],
+      lessons: "Effective PMOs in government must balance rigorous governance with the flexibility to navigate political complexities.",
+      year: 2018
+    },
+    {
+      id: 6,
+      title: "Enterprise Data Analytics",
+      industry: "Housing",
+      challengeType: ["Data Integration", "Analytics", "Decision Support"],
+      summary: "Unified data from 5+ core systems via Azure platform",
+      situation: "Data silos preventing informed decision-making, with critical information scattered across multiple systems.",
+      approach: "Architected Azure data platform, identified 30-40 critical metrics, implemented role-based Power BI dashboards.",
+      outcome: "Provided unified view of performance, enabled data-driven decisions at all levels of the organisation.",
+      metrics: [
+        { label: "Systems Integrated", value: "5+" },
+        { label: "Key Metrics", value: "30-40" },
+        { label: "User Base", value: "Hundreds" },
+        { label: "Data Sources", value: "12+" }
+      ],
+      techStack: ["Microsoft Azure", "Data Factory", "Data Lake", "Power BI", "SQL Server"],
+      lessons: "Start with business metrics that drive decisions, not with technical capabilities.",
+      year: 2022
+    }
+  ];
 
-  <section class="section">
-    <h2>Core Competencies</h2>
-    <p>
-      <span class="highlight">Architecting Solutions</span> | 
-      <span class="highlight">Delivering Outcomes</span> | 
-      <span class="highlight">Leading People</span>
-    </p>
-  </section>
+  // State for filters
+  const [selectedIndustry, setSelectedIndustry] = useState('All');
+  const [selectedChallenge, setSelectedChallenge] = useState('All');
+  const [activeStudy, setActiveStudy] = useState(null);
 
-  <section class="section">
-    <h2>Highlighted Projects</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Core System Turnaround (Civica CX)</h3>
-        <p>Rescued £1.2M migration across 8,000 properties, stabilised core operations.</p>
-        <div class="tags">#Housing #Programme Rescue #Governance #CRM</div>
+  // Extract unique industries and challenge types for filters
+  const industries = ['All', ...new Set(caseStudies.map(study => study.industry))];
+  const challengeTypes = ['All', ...new Set(caseStudies.flatMap(study => study.challengeType))];
+
+  // Filter case studies based on selected filters
+  const filteredStudies = caseStudies.filter(study => {
+    const industryMatch = selectedIndustry === 'All' || study.industry === selectedIndustry;
+    const challengeMatch = selectedChallenge === 'All' || study.challengeType.includes(selectedChallenge);
+    return industryMatch && challengeMatch;
+  });
+
+  return (
+    <div className="max-w-6xl mx-auto p-4 bg-gray-50">
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-gray-800 mb-2">Transformation Case Study Explorer</h1>
+        <p className="text-gray-600">Explore my approach to transformation across different industries and challenges.</p>
       </div>
-      <div class="card">
-        <h3>Building Safety Compliance</h3>
-        <p>Post-Grenfell risk compliance, real-time safety tracking via Power BI and D365.</p>
-        <div class="tags">#Risk Mitigation #TrueCompliance #Regulatory</div>
+
+      {/* Filters */}
+      <div className="flex flex-wrap mb-6 gap-4 bg-white p-4 rounded-lg shadow-sm">
+        <div className="mr-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Industry</label>
+          <select 
+            value={selectedIndustry}
+            onChange={(e) => setSelectedIndustry(e.target.value)}
+            className="border border-gray-300 rounded-md p-2 bg-white"
+          >
+            {industries.map(industry => (
+              <option key={industry} value={industry}>{industry}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Challenge Type</label>
+          <select 
+            value={selectedChallenge}
+            onChange={(e) => setSelectedChallenge(e.target.value)}
+            className="border border-gray-300 rounded-md p-2 bg-white"
+          >
+            {challengeTypes.map(type => (
+              <option key={type} value={type}>{type}</option>
+            ))}
+          </select>
+        </div>
       </div>
-      <div class="card">
-        <h3>P2P Automation</h3>
-        <p>Improved forecasting by 15%, reduced cycle times 40% using Power Platform.</p>
-        <div class="tags">#Efficiency #Finance #Automation</div>
+
+      {/* Timeline */}
+      <div className="mb-8 bg-white p-4 rounded-lg shadow-sm">
+        <h2 className="text-xl font-semibold mb-4 text-gray-700">Project Timeline</h2>
+        <div className="relative">
+          <div className="h-1 bg-blue-200 absolute w-full top-4"></div>
+          <div className="flex justify-between relative">
+            {caseStudies
+              .sort((a, b) => a.year - b.year)
+              .map((study) => (
+                <div 
+                  key={study.id} 
+                  className="flex flex-col items-center cursor-pointer"
+                  onClick={() => setActiveStudy(study)}
+                >
+                  <div className={`w-10 h-10 rounded-full z-10 flex items-center justify-center ${activeStudy?.id === study.id ? 'bg-blue-600' : 'bg-blue-400'} hover:bg-blue-500 transition-colors`}>
+                    <span className="text-white text-xs font-bold">{study.year}</span>
+                  </div>
+                  <div className={`text-xs mt-2 w-24 text-center ${activeStudy?.id === study.id ? 'font-bold' : ''}`}>{study.title}</div>
+                </div>
+              ))}
+          </div>
+        </div>
       </div>
-      <div class="card">
-        <h3>4G Nationwide Launch</h3>
-        <p>Led £5M data integration post-merger, delivering UK-wide coverage.</p>
-        <div class="tags">#Telecom #Delivery #Leadership</div>
+
+      {/* Case Study Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredStudies.map(study => (
+          <div 
+            key={study.id} 
+            className={`border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow ${activeStudy?.id === study.id ? 'ring-2 ring-blue-500' : ''}`}
+            onClick={() => setActiveStudy(study)}
+          >
+            <div className={`p-4 text-white ${study.industry === 'Housing' ? 'bg-blue-600' : study.industry === 'Telecommunications' ? 'bg-purple-600' : 'bg-green-600'}`}>
+              <h3 className="font-bold text-lg">{study.title}</h3>
+              <p className="text-sm flex items-center">
+                <span className="mr-2">{study.industry}</span>
+                <span className="inline-block w-1 h-1 bg-white rounded-full mx-1"></span>
+                <span>{study.year}</span>
+              </p>
+            </div>
+            <div className="p-4">
+              <div className="font-medium mb-2">{study.summary}</div>
+              
+              {/* Key Metrics Preview */}
+              <div className="flex mb-3 gap-2">
+                {study.metrics.slice(0, 2).map((metric, index) => (
+                  <div key={index} className="bg-gray-100 rounded-md p-2 text-center flex-1">
+                    <div className="text-blue-600 font-bold">{metric.value}</div>
+                    <div className="text-xs text-gray-500">{metric.label}</div>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-2 flex flex-wrap gap-1">
+                {study.challengeType.map(type => (
+                  <span key={type} className="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-1 mb-1">
+                    {type}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
+
+      {/* Detailed Case Study View */}
+      {activeStudy && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className={`p-4 text-white ${activeStudy.industry === 'Housing' ? 'bg-blue-600' : activeStudy.industry === 'Telecommunications' ? 'bg-purple-600' : 'bg-green-600'}`}>
+              <div className="flex justify-between items-center">
+                <h2 className="text-2xl font-bold">{activeStudy.title}</h2>
+                <button onClick={() => setActiveStudy(null)} className="text-white hover:bg-white hover:bg-opacity-20 rounded-full p-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <p>{activeStudy.industry} | {activeStudy.year}</p>
+            </div>
+            <div className="p-6">
+              {/* Metrics */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-3 text-gray-800">Key Metrics</h3>
+                <div className="flex flex-wrap gap-4 mb-4">
+                  {activeStudy.metrics.map((metric, index) => (
+                    <div key={index} className="bg-gray-100 p-3 rounded-lg text-center flex-1 min-w-[100px] shadow-sm">
+                      <div className="text-2xl font-bold text-blue-600">{metric.value}</div>
+                      <div className="text-sm text-gray-600">{metric.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Technology Stack */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-2 text-gray-800">Technology & Tools</h3>
+                <div className="flex flex-wrap gap-2">
+                  {activeStudy.techStack && activeStudy.techStack.map((tech, index) => (
+                    <span key={index} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                      {tech}
+                    </span>
+                  ))}
+                  {activeStudy.frameworks && activeStudy.frameworks.map((framework, index) => (
+                    <span key={index} className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">
+                      {framework}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Transformation Journey */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-2 text-gray-800">Transformation Journey</h3>
+                <div className="flex flex-col md:flex-row gap-4">
+                  <div className="flex-1 bg-red-50 p-4 rounded-md">
+                    <h4 className="font-medium text-red-700 mb-1">Situation</h4>
+                    <p className="text-gray-700">{activeStudy.situation}</p>
+                  </div>
+                  <div className="flex-1 bg-blue-50 p-4 rounded-md">
+                    <h4 className="font-medium text-blue-700 mb-1">Approach</h4>
+                    <p className="text-gray-700">{activeStudy.approach}</p>
+                  </div>
+                  <div className="flex-1 bg-green-50 p-4 rounded-md">
+                    <h4 className="font-medium text-green-700 mb-1">Outcome</h4>
+                    <p className="text-gray-700">{activeStudy.outcome}</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Impact Visualization (simplified) */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-2 text-gray-800">Impact Visualization</h3>
+                <div className="bg-gray-50 p-4 rounded-md border border-gray-200">
+                  <div className="flex flex-wrap gap-4 justify-around">
+                    {activeStudy.id === 1 && (
+                      <>
+                        <div className="text-center">
+                          <div className="font-medium mb-2">Team Effectiveness</div>
+                          <div className="flex items-center gap-3">
+                            <div className="w-16 h-16 rounded-full border-4 border-red-400 flex items-center justify-center">35%</div>
+                            <div className="text-xl">→</div>
+                            <div className="w-16 h-16 rounded-full border-4 border-green-500 flex items-center justify-center">92%</div>
+                          </div>
+                        </div>
+                      </>
+                    )}
+                    
+                    {activeStudy.id === 2 && (
+                      <div className="text-center w-full">
+                        <div className="font-medium mb-2">Compliance Rate Improvements</div>
+                        <div className="flex justify-center gap-8">
+                          <div className="text-center">
+                            <div className="text-red-500 font-bold text-2xl">60%</div>
+                            <div className="text-xs">Before</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-green-500 font-bold text-2xl">98%</div>
+                            <div className="text-xs">After</div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {activeStudy.id === 3 && (
+                      <div className="text-center w-full">
+                        <div className="font-medium mb-2">Network Coverage</div>
+                        <div className="flex justify-center gap-8">
+                          <div className="text-center">
+                            <div className="text-blue-500 font-bold text-2xl">67%</div>
+                            <div className="text-xs">Before</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-green-500 font-bold text-2xl">92%</div>
+                            <div className="text-xs">After</div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {activeStudy.id === 4 && (
+                      <div className="text-center w-full">
+                        <div className="font-medium mb-2">Process Improvements</div>
+                        <div className="flex justify-center gap-8">
+                          <div className="text-center">
+                            <div className="text-sm">Cycle Time</div>
+                            <div className="text-red-500 font-bold">15 days</div>
+                            <div className="text-green-500 font-bold">9 days</div>
+                            <div className="text-xs text-gray-500">-40%</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-sm">Forecast Accuracy</div>
+                            <div className="text-red-500 font-bold">78%</div>
+                            <div className="text-green-500 font-bold">93%</div>
+                            <div className="text-xs text-gray-500">+15%</div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {activeStudy.id === 5 && (
+                      <div className="text-center w-full">
+                        <div className="font-medium mb-2">Delivery Confidence Assessment</div>
+                        <div className="flex justify-center gap-4">
+                          <div className="flex flex-col items-center">
+                            <div className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center text-white text-xs">RED</div>
+                            <div className="text-xs mt-1">Before</div>
+                          </div>
+                          <div className="text-xl self-center">→</div>
+                          <div className="flex flex-col items-center">
+                            <div className="w-12 h-12 rounded-full bg-amber-400 flex items-center justify-center text-white text-xs">AMBER</div>
+                            <div className="text-xs mt-1">During</div>
+                          </div>
+                          <div className="text-xl self-center">→</div>
+                          <div className="flex flex-col items-center">
+                            <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white text-xs">GREEN</div>
+                            <div className="text-xs mt-1">After</div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {activeStudy.id === 6 && (
+                      <div className="text-center w-full">
+                        <div className="font-medium mb-2">Data-Driven Decision Making</div>
+                        <div className="flex justify-center gap-8">
+                          <div className="text-center">
+                            <div className="text-red-500 font-bold text-2xl">5%</div>
+                            <div className="text-xs">Before</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-green-500 font-bold text-2xl">60%</div>
+                            <div className="text-xs">After</div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+              
+              {/* Key Lessons */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-2 text-gray-800">Key Lessons</h3>
+                <div className="bg-yellow-50 p-4 rounded-md border-l-4 border-yellow-400">
+                  <p className="text-gray-700">{activeStudy.lessons}</p>
+                </div>
+              </div>
+              
+              <button 
+                onClick={() => setActiveStudy(null)}
+                className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
-  </section>
+  );
+};
 
-  <footer>
-    &copy; 2025 Ram Senthil-Maree | Download CV | Contact: 2maree@gmail.com
-  </footer>
-</body>
-</html>
+export default TransformationCaseStudyExplorer;
